@@ -1,0 +1,161 @@
+=========================
+ZIP64 LIBRARY TUTORIAL
+=========================
+
+TR / EN
+Date: 2026-03-29
+Author: ChatGPT 5.X (Vibe Coded)
+Version: 1.0
+
+-------------------------------------------------
+1. GENEL BAKIŞ / OVERVIEW
+-------------------------------------------------
+
+TR:
+Zip64, Java 25+ için yüksek performanslı, keyfi hassasiyette ondalık sayı kütüphanesidir.
+Floating-point (double/float) ile oluşan hassasiyet sorunlarını çözer.
+Hem senkron hem de sanal-thread (virtual-thread) ile asenkron işlemleri destekler.
+Oyun motoru veya başka bir framework’e bağımlı değildir.
+
+EN:
+Zip64 is a high-performance arbitrary-precision decimal library for Java 25+.
+It solves precision issues commonly encountered with floating-point (double/float) operations.
+Supports both synchronous and asynchronous operations via virtual threads.
+It is independent of game engines or any other frameworks.
+
+-------------------------------------------------
+2. UYUMLULUK / COMPATIBILITY
+-------------------------------------------------
+
+TR:
+- Java 25+ tam uyumludur ve tüm özellikleri destekler.
+- Java 21 ile çalışabilir, ancak Virtual Threads ve bazı async fonksiyonlarda bug riski vardır.
+- Mobil platformlarda Virtual Threads desteklenmediği için async API’leri kullanamazsınız.
+- Sadece senkron işlemler güvenlidir.
+
+EN:
+- Fully compatible with Java 25+, all features supported.
+- Works with Java 21 but with potential bugs in virtual-thread async operations.
+- Not supported on mobile platforms due to missing Virtual Threads.
+- Only synchronous operations are safe on mobile.
+
+-------------------------------------------------
+3. KURULUM / INSTALLATION
+-------------------------------------------------
+
+TR:
+1. Zip64.java dosyasını projenize kopyalayın.
+2. Java 25+ ile derleyin:
+
+    javac Zip64.java
+
+EN:
+1. Copy the Zip64.java file into your project.
+2. Compile using Java 25+:
+
+    javac Zip64.java
+
+-------------------------------------------------
+4. TEMEL KULLANIM / BASIC USAGE
+-------------------------------------------------
+
+TR:
+```java
+Zip64 a = new Zip64("12345678901234567890");
+Zip64 b = new Zip64("98765432109876543210");
+
+// Toplama
+Zip64 sum = a.add(b);
+
+// Çarpma
+Zip64 product = a.multiply(b);
+
+// Sonuçları yazdır
+System.out.println("Toplam: " + sum);
+System.out.println("Çarpım: " + product);
+
+// Asenkron kullanım (Virtual Threads)
+try (Zip64.Async async = Zip64.async()) {
+    Zip64 asyncSum = async.add(a, b).join();
+    System.out.println("Asenkron Toplam: " + asyncSum);
+}
+EN:
+Java
+Zip64 a = new Zip64("12345678901234567890");
+Zip64 b = new Zip64("98765432109876543210");
+
+// Addition
+Zip64 sum = a.add(b);
+
+// Multiplication
+Zip64 product = a.multiply(b);
+
+// Print results
+System.out.println("Sum: " + sum);
+System.out.println("Product: " + product);
+
+// Asynchronous usage (Virtual Threads)
+try (Zip64.Async async = Zip64.async()) {
+    Zip64 asyncSum = async.add(a, b).join();
+    System.out.println("Async Sum: " + asyncSum);
+}
+LİSTELERLE ÇALIŞMA / WORKING WITH LISTS
+TR: Zip64, listeler üzerinden toplama ve çarpma işlemlerini optimize eder.
+Java
+List<Zip64> numbers = List.of(a, b, sum, product);
+Zip64 totalSum = Zip64.sum(numbers);
+Zip64 totalProduct = Zip64.product(numbers);
+EN: Zip64 optimizes sum and product operations over lists.
+Java
+List<Zip64> numbers = List.of(a, b, sum, product);
+Zip64 totalSum = Zip64.sum(numbers);
+Zip64 totalProduct = Zip64.product(numbers);
+SERİLEŞTİRME / SERIALIZATION
+TR: Zip64 kendi RLE tabanlı string formatını kullanır:
+
+[sign]|[scale]|[RLE digits]
+Örnek:
+
++|5|10x1,5x2,2x3
+EN: Zip64 uses its own RLE-based string format:
+
+[sign]|[scale]|[RLE digits]
+Example:
+
++|5|10x1,5x2,2x3
+ÖZEL ÖZELLİKLER / SPECIAL FEATURES
+TR:
+Immutable ve thread-safe tasarım
+Normalizasyon (sondaki sıfırları kaldırma)
+Hızlı önbellekli değerler (0,1,10)
+Büyük sayılarla (100k+ basamak) performanslı çalışma
+Hatalara karşı güvenli
+EN:
+Immutable and thread-safe design
+Normalization of trailing zeros
+Cached common values (0,1,10)
+Efficient with very large numbers (100k+ digits)
+Robust error handling
+BENCHMARK ÖRNEĞİ / BENCHMARK EXAMPLE
+TR: Zip64Test.java ile 50.000+ basamaklı sayılar üzerinde:
+Toplama ve çarpma
+Virtual Thread ile asenkron toplama ve çarpma
+Süre ve basamak sayısı ölçümü
+EN: With Zip64Test.java for 50k+ digit numbers:
+Addition and multiplication
+Async sum/product using virtual threads
+Execution time and digit count measurement
+KATKIDA BULUNMA / CONTRIBUTING
+TR: Katkılarınızı bekliyoruz! Pull request’ler için:
+Yeni matematiksel operasyonlar
+Performans optimizasyonları
+Hata düzeltmeleri
+Dokümantasyon geliştirmeleri
+EN: Contributions welcome! Submit pull requests for:
+New mathematical operations
+Performance optimizations
+Bug fixes
+Documentation improvements
+LİSANS / LICENSE
+TR: MIT License © 2026 PixelPhantom
+EN: MIT License © 2026 PixelPhantom
