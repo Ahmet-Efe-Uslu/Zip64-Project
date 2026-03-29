@@ -6,7 +6,10 @@ on:
       - main
       - master
     tags:
-      - 'v*.*.*'   # v1.0.0 gibi tagler için
+      - 'v*.*.*'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build-and-publish:
