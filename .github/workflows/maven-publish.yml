@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - master
-  tags:
-    - 'v*.*.*'
+    tags:
+      - 'v*.*.*'   # v1.0.0 gibi tagler için
 
 jobs:
   build-and-publish:
