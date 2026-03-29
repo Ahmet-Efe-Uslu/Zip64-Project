@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pixelphantom</groupId>
+    <artifactId>zip64</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Zip64 High-Precision Math Library</name>
+    <description>High-performance arbitrary-precision decimal library for Java 25+. Compatible with Java 21 (may contain bugs). Async operations use virtual threads; mobile platforms are not supported.</description>
+    <url>https://github.com/Ahmet-Efe-Uslu/Zip64-Project</url>
+
+    <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+    </properties>
+
+    <build>
+        <!-- Source/Test direkt olarak kök dizin -->
+        <sourceDirectory>${project.basedir}</sourceDirectory>
+        <testSourceDirectory>${project.basedir}</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>25</source>
+                    <target>25</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Ahmet-Efe-Uslu/Zip64-Project</url>
+        </repository>
+    </distributionManagement>
+</project>
